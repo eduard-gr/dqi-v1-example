@@ -10,13 +10,13 @@ use Trackpoint\DataQueryInterface\Statement\StatementInterface;
 use Generator;
 
 /**
- * [
- * 	"lsusr_id",
- * 	"lsusr_first_name",
- * 	"lsusr_last_name",
- * 	"lsusr_gender",
- * 	"lsusr_description"
- * ]
+ * {
+ * 	"lsusr_id":{"constrain":2},
+ * 	"lsusr_first_name":{"constrain":0},
+ * 	"lsusr_last_name":{"constrain":0},
+ * 	"lsusr_gender":{"constrain":0},
+ * 	"lsusr_description":{"constrain":0},
+ * }
  */
 class UserProfileAccessMethod implements SelectInterface
 {

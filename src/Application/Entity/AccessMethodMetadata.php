@@ -45,8 +45,8 @@ class AccessMethodMetadata implements AccessMethodMetadataInterface
 			));
 		}
 
-		foreach ($metadata as $name){
-			$this->attributes->put($name, new AttributeMetadata($name));
+		foreach ($metadata as $name => $property){
+			$this->attributes->put($name, new AttributeMetadata($name, $property));
 		}
 
 	}

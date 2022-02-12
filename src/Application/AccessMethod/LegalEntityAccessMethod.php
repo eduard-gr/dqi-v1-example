@@ -9,13 +9,13 @@ use Trackpoint\DataQueryInterface\Statement\SelectInterface;
 use Trackpoint\DataQueryInterface\Statement\StatementInterface;
 use Generator;
 /**
- * [
- * 	"lslp_id",
- * 	"lsle_name",
- * 	"lsle_legal_form",
- * 	"lsle_registration_date",
- * 	"lsle_registration_number"
- * ]
+ * {
+ * 	"lslp_id":{"constrain":2},
+ * 	"lsle_name":{"constrain":0},
+ * 	"lsle_legal_form":{"constrain":0},
+ * 	"lsle_registration_date":{"constrain":0},
+ * 	"lsle_registration_number":{"constrain":0},
+ * }
  */
 class LegalEntityAccessMethod implements SelectInterface
 {
