@@ -1,0 +1,26 @@
+{
+	"name": "dqi/example",
+	"description": "API Example",
+	"type": "application",
+	"repositories":[
+		{
+			"type": "vcs",
+			"name": "trackpoint/data-query-interface",
+			"url": "git@github.com:trackpoint-logistic/data-query-interface.git"
+		}
+	],
+	"require": {
+		"php": "^7.4",
+		"monolog/monolog": "^2.3.5",
+		"php-di/php-di": "^6.3.5",
+		"psr/log": "^1.1.4",
+		"trackpoint/data-query-interface":"dev-master",
+		"ext-pdo": "*",
+		"ext-json": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"DataQueryInterface\\Example\\": "./src"
+		}
+	}
+}
