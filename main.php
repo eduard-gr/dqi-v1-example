@@ -9,6 +9,7 @@ use Monolog\Logger;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Trackpoint\DataQueryInterface\DataQueryInterface;
+use Trackpoint\DataQueryInterface\DQL;
 use Trackpoint\DataQueryInterface\Resolver\BuilderInterface;
 use Trackpoint\DataQueryInterface\Resolver\InterfaceResolver;
 use Trackpoint\DataQueryInterface\Resolver\MetadataProviderInterface;
@@ -46,14 +47,42 @@ $builder->addDefinitions([
 ]);
 
 $container = $builder->build();
+
+/**
+ * @var PDO $pdo
+ */
+$pdo = $container->get(PDO::class);
+
+/**
+ * @var DataQueryInterface $dqi
+ */
 $dqi = $container->get(DataQueryInterface::class);
 
 $query = include('select.php');
-$iterator = $dqi->execute($query);
 
-$result = [];
-foreach($iterator as $tuple){
-	$result[] = $tuple;
+if($query[DQL::STATEMENT] != DQL::SELECT){
+	$pdo->beginTransaction();
 }
 
-echo json_encode($result);
+try{
+	$iterator = $dqi->execute($query);
+
+	$result = [];
+	foreach($iterator as $tuple){
+		$result[] = $tuple;
+	}
+
+	if($pdo->inTransaction()){
+		$pdo->commit();
+	}
+
+	echo json_encode($result);
+
+}catch(Exception $exception){
+	if($pdo->inTransaction()){
+		$pdo->rollBack();
+	}
+}
+
+
+
