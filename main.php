@@ -1,6 +1,5 @@
 <?php
 
-use DataQueryInterface\Example\Application\Repository\LegalPersonRepository;
 use DataQueryInterface\Example\Application\Service\AccessMethodBuilderService;
 use DataQueryInterface\Example\Application\Service\AccessMethodMetadataService;
 use DI\ContainerBuilder;
@@ -16,7 +15,6 @@ use sad_spirit\pg_builder\StatementFactory;
 use Trackpoint\DataQueryInterface\DataQueryInterface;
 use Trackpoint\DataQueryInterface\DQL;
 use Trackpoint\DataQueryInterface\Resolver\BuilderInterface;
-use Trackpoint\DataQueryInterface\Resolver\InterfaceResolver;
 use Trackpoint\DataQueryInterface\Resolver\MetadataProviderInterface;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -24,21 +22,6 @@ require_once __DIR__ . '/vendor/autoload.php';
 $builder = new ContainerBuilder();
 
 //https://github.com/splitbrain/php-cli
-
-
-function getArgType($arg)
-{
-	switch (gettype($arg))
-	{
-		case 'double': return SQLITE3_FLOAT;
-		case 'integer': return SQLITE3_INTEGER;
-		case 'boolean': return SQLITE3_INTEGER;
-		case 'NULL': return SQLITE3_NULL;
-		case 'string': return SQLITE3_TEXT;
-		default:
-			throw new \InvalidArgumentException('Argument is of invalid type '.gettype($arg));
-	}
-}
 
 $builder->addDefinitions([
 	PDO::class => DI\factory(function (ContainerInterface $c) {
