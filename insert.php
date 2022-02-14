@@ -3,15 +3,7 @@
 use Trackpoint\DataQueryInterface\DQL;
 
 return [
-	DQL::STATEMENT => DQL::SELECT,
-
-	DQL::EXPRESSIONS => [
-		[
-			DQL::TYPE => DQL::EQUAL,
-			DQL::NAME => 'lslp_id',
-			DQL::CONSTANT => '13'
-		]
-	],
+	DQL::STATEMENT => DQL::INSERT,
 
 	DQL::RETURNING => [
 		'lslp_id',
@@ -21,6 +13,16 @@ return [
 		'lsusr_last_name',
 		'lsusr_gender',
 		'lsusr_description'
+	],
+
+	DQL::DATA => [
+		'lslp_type' => 1,
+		'lslp_status' => 1,
+		'lsusr_status' => 1,
+		'lsusr_first_name' => 'First name',
+		'lsusr_last_name' => 'Last name',
+		'lsusr_gender' => 'M',
+		'lsusr_description' => 'New user description'
 	],
 
 
