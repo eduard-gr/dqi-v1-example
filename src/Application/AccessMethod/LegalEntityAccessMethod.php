@@ -5,20 +5,31 @@ namespace DataQueryInterface\Example\Application\AccessMethod;
 
 use Psr\Log\LoggerInterface;
 use Trackpoint\DataQueryInterface\Expression\Condition;
+use Trackpoint\DataQueryInterface\Metadata\AttributeMetadata;
 use Trackpoint\DataQueryInterface\Statement\SelectInterface;
 use Trackpoint\DataQueryInterface\Statement\StatementInterface;
 use Generator;
-/**
- * {
- * 	"lslp_id":{"constrain":2},
- * 	"lsle_name":{"constrain":0},
- * 	"lsle_legal_form":{"constrain":0},
- * 	"lsle_registration_date":{"constrain":0},
- * 	"lsle_registration_number":{"constrain":0},
- * }
- */
+
 class LegalEntityAccessMethod implements SelectInterface
 {
+
+	const METADATA = [
+		"lslp_id" => [
+			AttributeMetadata::CONSTRAINT => AttributeMetadata::FOREIGN_CONSTRAINT
+		],
+		"lsle_name" => [
+			AttributeMetadata::CONSTRAINT => AttributeMetadata::NO_CONSTRAINT
+		],
+		"lsle_legal_form" => [
+			AttributeMetadata::CONSTRAINT => AttributeMetadata::NO_CONSTRAINT
+		],
+		"lsle_registration_date" => [
+			AttributeMetadata::CONSTRAINT => AttributeMetadata::NO_CONSTRAINT
+		],
+		"lsle_registration_number" => [
+			AttributeMetadata::CONSTRAINT => AttributeMetadata::NO_CONSTRAINT
+		],
+	];
 
 	private LoggerInterface $logger;
 	private StatementInterface $statement;

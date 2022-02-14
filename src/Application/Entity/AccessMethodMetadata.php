@@ -35,11 +35,8 @@ class AccessMethodMetadata implements AccessMethodMetadataInterface
 			));
 		}
 
-
-		$json = trim(str_replace(['/','*'], '', $reflection->getDocComment()));
-
-		$metadata = json_decode($json, true);
-		if(json_last_error() != JSON_ERROR_NONE){
+		$metadata = $reflection->getConstant('METADATA');
+		if($metadata === false){
 			throw new Exception(sprintf('Error reading metadata for interface %s',
 				$reflection->getShortName()
 			));
